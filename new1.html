@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='UTF-8'>
+  <title>Оставить отзыв</title>
+  <style>
+    body {
+      background-color: pink;
+    }
+
+    label {
+      background-color: #8EE2DE;
+      padding: 5px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Оставить отзыв</h1>
+  <form method="post">
+    <label for="name">Ваше имя:</label>
+    <input type="text" id="name" name='name'>
+    <br>
+
+    <label for="email">Ваш email:</label>
+    <input type="email" id="email" name='email'>
+    <br>
+
+    <label for="feedback">Ваш отзыв:</label>
+    <textarea id="feedback" name='feedback'></textarea>
+    <br>
+
+    <button type="submit" name='submit'>Отправить</button>
+  </form>
+  
+<?php
+  if (isset($_POST['submit'])) {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $feedback = $_POST['feedback'];
+
+    $conn = new mysqli('localhost','root','','slovo-day');
+	$conn->query("INSERT INTO `users` (`id`, `name`, `email`, `feedback`) VALUES (NULL, '$name', '$email', '$feedback')");
+    $conn->close();
+  }
+  ?>
+</body>
+</html>
+
+
